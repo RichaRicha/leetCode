@@ -2,6 +2,9 @@ class Solution {
     public int romanToInt(String s) {
         
         int ans = 0, num = 0;
+        // Roman numbers - largest to smallest
+        // from right to left add up
+        
         for (int i = s.length()-1; i >= 0; i--) {
             switch(s.charAt(i)) {
                 case 'I': num = 1; break;
@@ -12,8 +15,11 @@ class Solution {
                 case 'D': num = 500; break;
                 case 'M': num = 1000; break;
             }
-            if (4 * num < ans) ans -= num;
-            else ans += num;
+            // for subtract val, XL (4*10) < 50 -> 50 - 10  
+            if (4 * num < ans) 
+                ans -= num;
+            else 
+                ans += num;
         }
         return ans;
     }
