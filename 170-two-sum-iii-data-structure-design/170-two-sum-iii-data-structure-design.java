@@ -1,37 +1,25 @@
 class TwoSum {
 
-    List<Integer> nums;
-    public TwoSum() {
-        nums = new ArrayList<>();
-    }
-    
-    public void add(int number) {
-        nums.add(number);
-    }
-    
-    public boolean find(int value) {
-        int [] numbers = nums.stream().mapToInt(Integer::intValue).toArray();
-        return twoSum(numbers, value);
-    }
-    
-    public boolean twoSum(int[] nums, int target) {
-        boolean sum = false;
-        Map<Integer,Integer> numMap = new HashMap<>();
-        if ((nums.length >= 2 && nums.length <= Math.pow(10, 4)) &&
-                (target >= (-Math.pow(10, 9)) && target <= Math.pow(10, 9))) {
-            for(int i = 0; i < nums.length; i++){
-               if (nums[i] <= Math.pow(10, 9) && nums[i] >= (-Math.pow(10, 9))) { 
-                    if(numMap.containsKey(target-nums[i])){
-                        sum = true;
-                        break;
-                    }else{
-                        numMap.put(nums[i], i);
-                    }   
-               }
-            }
-        }    
-        return sum;
-    }
+    private List<Integer> list = new ArrayList<Integer>();
+    private Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+    // Add the number to an internal data structure.
+	public void add(int number) {
+	    if (map.containsKey(number)) map.put(number, map.get(number) + 1);
+	    else {
+	        map.put(number, 1);
+	        list.add(number);
+	    }
+	}
+
+    // Find if there exists any pair of numbers which sum is equal to the value.
+	public boolean find(int value) {
+	    for (int i = 0; i < list.size(); i++){
+	        int num1 = list.get(i), num2 = value - num1;
+	        if ((num1 == num2 && map.get(num1) > 1) || (num1 != num2 && map.containsKey(num2))) return true;
+	    }
+	    return false;
+	}
 }
 
 /**
