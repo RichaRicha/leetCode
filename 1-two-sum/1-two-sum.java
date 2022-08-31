@@ -9,6 +9,7 @@ class Solution {
                     if(numMap.containsKey(target-nums[i])){
                         indices[0] = i;
                         indices[1] = numMap.get(target-nums[i]);
+                        break;
                     }else{
                         numMap.put(nums[i], i);
                     }   
